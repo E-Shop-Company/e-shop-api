@@ -7,14 +7,14 @@ import {
   NestInterceptor,
   PayloadTooLargeException,
   UnprocessableEntityException,
-  UnsupportedMediaTypeException,
+  UnsupportedMediaTypeException
 } from '@nestjs/common';
 import { HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { ConfigService } from '@nestjs/config';
 
 import {
   ENUM_FILE_IMAGE_MIME,
-  ENUM_FILE_STATUS_CODE_ERROR,
+  ENUM_FILE_STATUS_CODE_ERROR
 } from '../enums/file.enum';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class FileImageInterceptor implements NestInterceptor {
 
   async intercept(
     context: ExecutionContext,
-    next: CallHandler,
+    next: CallHandler
   ): Promise<Observable<Promise<any> | string>> {
     const ctx: HttpArgumentsHost = context.switchToHttp();
     const { file, files } = ctx.getRequest();
@@ -36,7 +36,7 @@ export class FileImageInterceptor implements NestInterceptor {
       if (finalFiles.length > maxFiles) {
         throw new UnprocessableEntityException({
           statusCode: ENUM_FILE_STATUS_CODE_ERROR.FILE_MAX_ERROR,
-          message: 'file.error.maxFiles',
+          message: 'file.error.maxFiles'
         });
       }
 
@@ -54,7 +54,7 @@ export class FileImageInterceptor implements NestInterceptor {
     if (!file) {
       throw new UnprocessableEntityException({
         statusCode: ENUM_FILE_STATUS_CODE_ERROR.FILE_NEEDED_ERROR,
-        message: 'file.error.notFound',
+        message: 'file.error.notFound'
       });
     }
 
@@ -63,17 +63,17 @@ export class FileImageInterceptor implements NestInterceptor {
     const maxSize = this.configService.get<number>('file.maxFileSize');
     if (
       !Object.values(ENUM_FILE_IMAGE_MIME).find(
-        (val) => val === mimetype.toLowerCase(),
+        (val) => val === mimetype.toLowerCase()
       )
     ) {
       throw new UnsupportedMediaTypeException({
         statusCode: ENUM_FILE_STATUS_CODE_ERROR.FILE_EXTENSION_ERROR,
-        message: 'file.error.mimeInvalid',
+        message: 'file.error.mimeInvalid'
       });
     } else if (size > maxSize) {
       throw new PayloadTooLargeException({
         statusCode: ENUM_FILE_STATUS_CODE_ERROR.FILE_MAX_SIZE_ERROR,
-        message: 'file.error.maxSize',
+        message: 'file.error.maxSize'
       });
     }
   }

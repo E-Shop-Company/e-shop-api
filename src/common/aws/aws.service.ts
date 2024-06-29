@@ -11,12 +11,12 @@ import {
   ObjectCannedACL,
   ObjectIdentifier,
   PutObjectCommand,
-  S3Client,
+  S3Client
 } from '@aws-sdk/client-s3';
 import {
   Injectable,
   InternalServerErrorException,
-  OnModuleInit,
+  OnModuleInit
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { DebuggerService } from '../debugger/debugger.service';
@@ -30,16 +30,14 @@ export class AwsS3Service implements OnModuleInit {
 
   constructor(
     private readonly configService: ConfigService,
-    private readonly debuggerService: DebuggerService,
+    private readonly debuggerService: DebuggerService
   ) {
     this.s3Client = new S3Client({
       credentials: {
         accessKeyId: this.configService.get<string>('aws.credential.key'),
-        secretAccessKey: this.configService.get<string>(
-          'aws.credential.secret',
-        ),
+        secretAccessKey: this.configService.get<string>('aws.credential.secret')
       },
-      region: this.configService.get<string>('aws.s3.region'),
+      region: this.configService.get<string>('aws.s3.region')
     });
 
     this.bucket = this.configService.get<string>('aws.s3.bucket');
@@ -75,7 +73,7 @@ export class AwsS3Service implements OnModuleInit {
   async s3ListItemInBucket(prefix?: string): Promise<IAwsS3Response[]> {
     const command: ListObjectsV2Command = new ListObjectsV2Command({
       Bucket: this.bucket,
-      Prefix: prefix,
+      Prefix: prefix
     });
     const listItems: Record<string, any> = await this.s3Client
       .send(command)
@@ -96,14 +94,14 @@ export class AwsS3Service implements OnModuleInit {
         path,
         pathWithFilename: val.Key,
         filename: filename,
-        mime,
+        mime
       };
     });
   }
 
   async s3GetItemInBucket(
     filename: string,
-    path?: string,
+    path?: string
   ): Promise<Record<string, any>> {
     // deepcode ignore GlobalReplacementRegex: <I want to replace only the first forward slash>
     if (path) path = path.startsWith('/') ? path.replace('/', '') : `${path}`;
@@ -111,7 +109,7 @@ export class AwsS3Service implements OnModuleInit {
     const key: string = path ? `${path}/${filename}` : filename;
     const command: GetObjectCommand = new GetObjectCommand({
       Bucket: this.bucket,
-      Key: key,
+      Key: key
     });
 
     const item: Record<string, any> = await this.s3Client
@@ -138,7 +136,7 @@ export class AwsS3Service implements OnModuleInit {
       | Float32Array
       | Float64Array
       | string,
-    options: Record<string, any>,
+    options: Record<string, any>
   ): Promise<IAwsS3Response> {
     const path: string = options && options.path ? options.path : undefined;
     const acl: ObjectCannedACL =
@@ -152,7 +150,7 @@ export class AwsS3Service implements OnModuleInit {
       .resize({
         fit: sharp.fit.fill,
         width: 330,
-        height: 330,
+        height: 330
       })
       .toFormat('png')
       .toBuffer();
@@ -160,7 +158,7 @@ export class AwsS3Service implements OnModuleInit {
       Bucket: this.bucket,
       Key: key,
       Body: content,
-      ACL: acl,
+      ACL: acl
     });
 
     await this.s3Client.send(command).catch((e) => {
@@ -172,14 +170,14 @@ export class AwsS3Service implements OnModuleInit {
       path,
       pathWithFilename: key,
       filename: filename,
-      mime: 'PNG',
+      mime: 'PNG'
     };
   }
 
   async s3DeleteItemInBucket(filename: string): Promise<void> {
     const command: DeleteObjectCommand = new DeleteObjectCommand({
       Bucket: this.bucket,
-      Key: filename,
+      Key: filename
     });
 
     await this.s3Client.send(command).catch((e) => {
@@ -190,13 +188,13 @@ export class AwsS3Service implements OnModuleInit {
 
   async s3DeleteItemsInBucket(filenames: string[]): Promise<void> {
     const keys: ObjectIdentifier[] = filenames.map((val) => ({
-      Key: val,
+      Key: val
     }));
     const command: DeleteObjectsCommand = new DeleteObjectsCommand({
       Bucket: this.bucket,
       Delete: {
-        Objects: keys,
-      },
+        Objects: keys
+      }
     });
 
     await this.s3Client.send(command).catch((e) => {
@@ -207,7 +205,7 @@ export class AwsS3Service implements OnModuleInit {
 
   async s3DeleteBucket(): Promise<void> {
     const command: DeleteBucketCommand = new DeleteBucketCommand({
-      Bucket: this.bucket,
+      Bucket: this.bucket
     });
 
     await this.s3Client.send(command).catch((e) => {
@@ -218,7 +216,7 @@ export class AwsS3Service implements OnModuleInit {
 
   async s3CreateBucket(): Promise<void> {
     const command: CreateBucketCommand = new CreateBucketCommand({
-      Bucket: this.bucket,
+      Bucket: this.bucket
     });
 
     await this.s3Client.send(command).catch((e) => {

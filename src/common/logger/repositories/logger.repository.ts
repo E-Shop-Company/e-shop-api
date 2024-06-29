@@ -10,7 +10,7 @@ import { Logger } from '../entities/logger.entity';
 export class LoggerRepository {
   constructor(
     @InjectModel(Logger.name)
-    private readonly model: PaginateModel<ILoggerDocument>,
+    private readonly model: PaginateModel<ILoggerDocument>
   ) {}
 
   async create(doc: Partial<ILoggerDocument>): Promise<ILoggerDocument> {

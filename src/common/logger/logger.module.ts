@@ -10,7 +10,7 @@ import { LoggerRepository } from './repositories/logger.repository';
   providers: [LoggerService, LoggerRepository],
   exports: [LoggerService],
   imports: [
-    MongooseModule.forFeature([{ name: Logger.name, schema: LoggerSchema }]),
-  ],
+    MongooseModule.forFeature([{ name: Logger.name, schema: LoggerSchema }])
+  ]
 })
 export class LoggerModule {}

@@ -11,7 +11,7 @@ import { User } from '../entities/user.entity';
 export class UserRepository extends BaseRepository<IUserDocument> {
   constructor(
     @InjectModel(User.name)
-    protected readonly model: PaginateModel<IUserDocument>,
+    protected readonly model: PaginateModel<IUserDocument>
   ) {
     super(model);
   }

@@ -11,19 +11,19 @@ export class DebuggerService {
   constructor(
     @Inject(REQUEST) private req: RequestWithUser,
     @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
-    private readonly loggerService: LoggerService,
+    private readonly loggerService: LoggerService
   ) {}
 
   info(
     description: string,
     sClass: string,
     sFunction: string,
-    data?: any,
+    data?: any
   ): void {
     this.logger.info(description, {
       class: sClass,
       function: sFunction,
-      data,
+      data
     });
   }
 
@@ -31,12 +31,12 @@ export class DebuggerService {
     description: string,
     sClass: string,
     sFunction: string,
-    data?: any,
+    data?: any
   ): void {
     this.logger.debug(description, {
       class: sClass,
       function: sFunction,
-      data,
+      data
     });
   }
 
@@ -44,18 +44,18 @@ export class DebuggerService {
     description: string,
     sClass: string,
     sFunction: string,
-    error?: any,
+    error?: any
   ): void {
     this.logger.error(description, {
       class: sClass,
       function: sFunction,
-      error,
+      error
     });
 
     this.loggerService.error({
       description,
       user: this.req.user ? this.req.user._id : null,
-      tags: [sClass, sFunction],
+      tags: [sClass, sFunction]
     });
   }
 }

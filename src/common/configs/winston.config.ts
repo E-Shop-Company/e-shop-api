@@ -1,6 +1,6 @@
 import {
   utilities as nestWinstonModuleUtilities,
-  WinstonModuleOptions,
+  WinstonModuleOptions
 } from 'nest-winston';
 import * as winston from 'winston';
 
@@ -11,8 +11,8 @@ export const winstonConfig: WinstonModuleOptions = {
       format: winston.format.combine(
         winston.format.timestamp(),
         winston.format.prettyPrint(),
-        nestWinstonModuleUtilities.format.nestLike(),
-      ),
-    }),
-  ],
+        nestWinstonModuleUtilities.format.nestLike()
+      )
+    })
+  ]
 };

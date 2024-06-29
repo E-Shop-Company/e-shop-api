@@ -6,7 +6,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
-  PipeTransform,
+  PipeTransform
 } from '@nestjs/common';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class ValidationPipe implements PipeTransform {
     if (errors.length > 0) {
       throw new HttpException(
         `Validation failed: ${this.formatErrors(errors)}`,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.BAD_REQUEST
       );
     }
     return value;

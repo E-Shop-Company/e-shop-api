@@ -5,7 +5,7 @@ import { RoleTypeEnum } from '../../../common/enums/role-type.enum';
 
 @Schema({
   timestamps: true,
-  versionKey: false,
+  versionKey: false
 })
 export class User {
   @Prop({ type: String, required: true })

@@ -7,7 +7,7 @@ import {
   Post,
   Put,
   Query,
-  UploadedFile,
+  UploadedFile
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -21,7 +21,7 @@ import {
   ApiParam,
   ApiTags,
   ApiBadRequestResponse,
-  ApiUnauthorizedResponse,
+  ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 import { AuthUser } from '../../common/decorators/auth-user.decorator';
 import { UploadFileSingle } from '../../common/decorators/file.decorator';
@@ -39,10 +39,10 @@ import { UserService } from './user.service';
 @Controller('users')
 @ApiForbiddenResponse({
   description:
-    'You are not authorized to access this endpoint, please contact the administrator!',
+    'You are not authorized to access this endpoint, please contact the administrator!'
 })
 @ApiUnauthorizedResponse({
-  description: 'You are not authorized to access this endpoint, please login!',
+  description: 'You are not authorized to access this endpoint, please login!'
 })
 @Roles(RoleTypeEnum.SuperAdmin, RoleTypeEnum.Admin)
 export class UserController {
@@ -63,7 +63,7 @@ export class UserController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get Logged in User Details' })
   @ApiOkResponse({
-    description: 'Successfully fetched logged in user details.',
+    description: 'Successfully fetched logged in user details.'
   })
   async getLoggedinUserDetails(@AuthUser() user: any) {
     return this.service.getLoggedinUserDetails(user._id);
@@ -74,7 +74,7 @@ export class UserController {
   @Roles(RoleTypeEnum.All)
   @ApiOperation({ summary: 'Delete Logged in User Details' })
   @ApiOkResponse({
-    description: 'Successfully deleted logged in user details.',
+    description: 'Successfully deleted logged in user details.'
   })
   async deleteLoggedinUserDetails(@AuthUser() user: any) {
     return this.service.deleteLoggedinUserDetails(user._id);
@@ -89,7 +89,7 @@ export class UserController {
   @ApiCreatedResponse({ description: 'Image has been successfully uploaded.' })
   async uploadLoggedinUserImage(
     @AuthUser() user: any,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File
   ) {
     return this.service.uploadLoggedinUserImage(user._id, file);
   }
@@ -110,7 +110,7 @@ export class UserController {
   @ApiOkResponse({ description: 'Successfully fetched users.' })
   async findAll(@Query(new PaginationPipe()) q: FindUsersDto) {
     return this.service.findPaginated((<any>q).filter, {
-      ...(<any>q).options,
+      ...(<any>q).options
     });
   }
 
@@ -143,7 +143,7 @@ export class UserController {
   @ApiNotFoundResponse({ description: 'User not found.' })
   async upload(
     @Param('id') id: string,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File
   ) {
     return this.service.uploadImage(id, file);
   }

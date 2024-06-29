@@ -11,5 +11,5 @@ export default [
   DatabaseConfig,
   ElasticSearchConfig,
   AwsConfig,
-  EmailConfig,
+  EmailConfig
 ];

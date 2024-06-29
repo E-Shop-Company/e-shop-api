@@ -17,7 +17,7 @@ async function bootstrap() {
     production: configService.get<string>('app.productionURL'),
     staging: configService.get<string>('app.stagingURL'),
     development: configService.get<string>('app.developmentURL'),
-    local: configService.get<string>('app.localURL'),
+    local: configService.get<string>('app.localURL')
   };
   const options = new DocumentBuilder()
     .setTitle('E-Shop')

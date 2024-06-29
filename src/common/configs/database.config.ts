@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService, registerAs } from '@nestjs/config';
 import {
   MongooseModuleOptions,
-  MongooseOptionsFactory,
+  MongooseOptionsFactory
 } from '@nestjs/mongoose';
 
 export default registerAs(
@@ -12,8 +12,8 @@ export default registerAs(
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     debug: process.env.DATABASE_DEBUG,
-    url: process.env.DATABASE_URL,
-  }),
+    url: process.env.DATABASE_URL
+  })
 );
 
 @Injectable()
@@ -31,7 +31,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
         connection.plugin(require('mongoose-autopopulate'));
         Logger.debug(`App connected to MongoDB at ${uri}`, 'MONGODB');
         return connection;
-      },
+      }
     };
   }
 }

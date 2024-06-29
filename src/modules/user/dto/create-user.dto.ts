@@ -3,7 +3,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsOptional,
-  IsString,
+  IsString
 } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
@@ -14,7 +14,7 @@ export class CreateUserDto {
     type: String,
     required: true,
     description: 'User first name',
-    example: 'John',
+    example: 'John'
   })
   @IsString()
   @IsNotEmpty()
@@ -24,7 +24,7 @@ export class CreateUserDto {
     type: String,
     required: true,
     description: 'User last name',
-    example: 'Doe',
+    example: 'Doe'
   })
   @IsString()
   @IsNotEmpty()
@@ -34,7 +34,7 @@ export class CreateUserDto {
     type: String,
     required: true,
     description: 'User email',
-    example: 'be@example.com',
+    example: 'be@example.com'
   })
   @IsString()
   @IsEmail()
@@ -45,7 +45,7 @@ export class CreateUserDto {
     type: String,
     required: true,
     description: 'User password',
-    example: '123456',
+    example: '123456'
   })
   @IsString()
   @IsNotEmpty()
@@ -56,7 +56,7 @@ export class CreateUserDto {
     required: true,
     description: 'User role',
     enum: Object.values(RoleTypeEnum),
-    example: RoleTypeEnum.User,
+    example: RoleTypeEnum.User
   })
   @IsString()
   @IsNotEmpty()
@@ -67,7 +67,7 @@ export class CreateUserDto {
     type: String,
     required: false,
     description: 'User address',
-    example: 'New York, USA',
+    example: 'New York, USA'
   })
   @IsString()
   @IsOptional()
@@ -77,7 +77,7 @@ export class CreateUserDto {
     type: String,
     required: false,
     description: 'User phone',
-    example: '+1 212-226-3126',
+    example: '+1 212-226-3126'
   })
   @IsString()
   @IsOptional()
@@ -87,7 +87,7 @@ export class CreateUserDto {
     type: String,
     required: false,
     description: 'User company name',
-    example: 'Google',
+    example: 'Google'
   })
   @IsString()
   @IsOptional()
@@ -97,7 +97,7 @@ export class CreateUserDto {
     type: String,
     required: false,
     description: 'User website URL',
-    example: 'https://google.com',
+    example: 'https://google.com'
   })
   @IsString()
   @IsOptional()
@@ -107,7 +107,7 @@ export class CreateUserDto {
     type: String,
     required: false,
     description: 'User bio',
-    example: 'I am a software engineer',
+    example: 'I am a software engineer'
   })
   @IsString()
   @IsOptional()

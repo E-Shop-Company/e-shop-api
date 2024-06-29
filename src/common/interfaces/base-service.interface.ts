@@ -16,6 +16,6 @@ export interface IBaseService<T> {
   deleteMany(filter: object): Promise<T>;
   findPaginated(
     filter: object,
-    paginateOptions: IPaginateOptions,
+    paginateOptions: IPaginateOptions
   ): Promise<IPaginatedInterface<T>>;
 }

@@ -7,7 +7,7 @@ import { FileImageInterceptor } from '../interceptors/file-image.interceptor';
 export function UploadFileSingle(field: string, type: ENUM_FILE_TYPE): any {
   if (type === ENUM_FILE_TYPE.IMAGE) {
     return applyDecorators(
-      UseInterceptors(FileInterceptor(field), FileImageInterceptor),
+      UseInterceptors(FileInterceptor(field), FileImageInterceptor)
     );
   }
 
@@ -17,7 +17,7 @@ export function UploadFileSingle(field: string, type: ENUM_FILE_TYPE): any {
 export function UploadFileMultiple(field: string, type: ENUM_FILE_TYPE): any {
   if (type === ENUM_FILE_TYPE.IMAGE) {
     return applyDecorators(
-      UseInterceptors(FilesInterceptor(field), FileImageInterceptor),
+      UseInterceptors(FilesInterceptor(field), FileImageInterceptor)
     );
   }
 

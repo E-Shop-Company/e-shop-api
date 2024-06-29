@@ -44,14 +44,14 @@ import { UserService } from './user.service';
           });
 
           return schema;
-        },
-      },
+        }
+      }
     ]),
     forwardRef(() => AwsModule),
-    forwardRef(() => ImageModule),
+    forwardRef(() => ImageModule)
   ],
   providers: [UserService, UserRepository],
   controllers: [UserController],
-  exports: [UserRepository, UserService],
+  exports: [UserRepository, UserService]
 })
 export class UserModule {}

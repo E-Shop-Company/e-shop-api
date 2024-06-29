@@ -17,7 +17,7 @@ export class PaginationPipe
     const sortVal: any = { [sort]: dir };
     const paginateOptions: IPaginateOptions = new PaginationOptionsDto(
       { page: page, limit: limit },
-      sortVal,
+      sortVal
     );
 
     paginateOptions.lean = paginateOptions.lean ? paginateOptions.lean : false;
@@ -27,15 +27,15 @@ export class PaginationPipe
         {
           name: {
             $regex: '^' + filter.search,
-            $options: 'i',
-          },
+            $options: 'i'
+          }
         },
         {
           code: {
             $regex: '^' + filter.search,
-            $options: 'i',
-          },
-        },
+            $options: 'i'
+          }
+        }
       ];
 
       delete filter.search;
@@ -43,7 +43,7 @@ export class PaginationPipe
 
     return {
       filter,
-      options: paginateOptions,
+      options: paginateOptions
     } as FormattedPaginateQueryOptionsDto;
   }
 }

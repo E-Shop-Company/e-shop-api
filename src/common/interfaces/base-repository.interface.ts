@@ -15,6 +15,6 @@ export interface IBaseRepository<T> {
   deleteMany(filter: object): Promise<T>;
   paginate(
     filter: object,
-    paginateOptions: IPaginateOptions,
+    paginateOptions: IPaginateOptions
   ): Promise<IPaginatedInterface<T>>;
 }

@@ -5,5 +5,5 @@ export enum RoleTypeEnum {
   Vendor = 'Vendor',
   Admin = 'Admin',
   SuperAdmin = 'SuperAdmin',
-  All = 'All',
+  All = 'All'
 }
