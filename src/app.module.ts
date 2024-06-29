@@ -7,7 +7,7 @@ import { LoggerModule } from './common/logger/logger.module';
 import configs from './common/configs';
 import {
   WinstonModule,
-  utilities as nestWinstonModuleUtilities,
+  utilities as nestWinstonModuleUtilities
 } from 'nest-winston';
 import { MongooseConfigService } from './common/configs/database.config';
 import { UserModule } from './modules/user/user.module';
@@ -23,7 +23,7 @@ import * as winston from 'winston';
       isGlobal: true,
       cache: true,
       envFilePath: ['.env'],
-      expandVariables: true,
+      expandVariables: true
     }),
     WinstonModule.forRootAsync({
       imports: [DebuggerModule],
@@ -34,22 +34,22 @@ import * as winston from 'winston';
             format: winston.format.combine(
               winston.format.timestamp(),
               winston.format.prettyPrint(),
-              nestWinstonModuleUtilities.format.nestLike(),
-            ),
-          }),
-        ],
+              nestWinstonModuleUtilities.format.nestLike()
+            )
+          })
+        ]
       }),
-      inject: [ConfigService],
+      inject: [ConfigService]
     }),
     MongooseModule.forRootAsync({
       useClass: MongooseConfigService,
-      inject: [ConfigService],
+      inject: [ConfigService]
     }),
     LoggerModule,
     UserModule,
-    ImageModule,
+    ImageModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}

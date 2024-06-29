@@ -4,7 +4,7 @@ import {
   FilterQuery,
   PaginateModel,
   Types,
-  UpdateQuery,
+  UpdateQuery
 } from 'mongoose';
 import { IBaseRepository } from './interfaces/base-repository.interface';
 import { IPaginateOptions } from './interfaces/paginate-options.interface';
@@ -34,7 +34,7 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
   find(
     filter: FilterQuery<T>,
     projection: any = null,
-    sort: any = { _id: -1 },
+    sort: any = { _id: -1 }
   ): Promise<T[]> {
     return this.model.find(filter, projection).sort(sort);
   }
@@ -42,14 +42,14 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
   updateById(id: string | Types.ObjectId, update: UpdateQuery<T>): Promise<T> {
     return this.model.findByIdAndUpdate(id, update, {
       new: true,
-      useFindAndModify: true,
+      useFindAndModify: true
     });
   }
 
   updateOne(filter: FilterQuery<T>, update: UpdateQuery<T>): Promise<T> {
     return this.model.findOneAndUpdate(filter, update, {
       new: true,
-      useFindAndModify: true,
+      useFindAndModify: true
     });
   }
 
@@ -71,7 +71,7 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
 
   async paginate(
     filter: object,
-    paginateOptions: IPaginateOptions,
+    paginateOptions: IPaginateOptions
   ): Promise<IPaginatedInterface<T>> {
     const paginatedResult = await this.model.paginate(filter, paginateOptions);
 
@@ -80,7 +80,7 @@ export class BaseRepository<T extends Document> implements IBaseRepository<T> {
       total: paginatedResult.totalDocs,
       limit: paginatedResult.limit,
       page: paginatedResult.page,
-      pages: paginatedResult.totalPages,
+      pages: paginatedResult.totalPages
     };
   }
 

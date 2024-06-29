@@ -11,6 +11,6 @@ export default registerAs(
     productionURL: process.env.PRODUCTION_URL,
     stagingURL: process.env.STAGING_URL,
     developmentURL: process.env.DEVELOPMENT_URL,
-    localURL: process.env.LOCAL_URL,
-  }),
+    localURL: process.env.LOCAL_URL
+  })
 );

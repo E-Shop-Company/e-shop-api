@@ -7,9 +7,9 @@ import { ImageRepository } from './repositories/image.repository';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Image.name, schema: ImageSchema }]),
+    MongooseModule.forFeature([{ name: Image.name, schema: ImageSchema }])
   ],
   providers: [ImageService, ImageRepository],
-  exports: [ImageService, ImageRepository],
+  exports: [ImageService, ImageRepository]
 })
 export class ImageModule {}

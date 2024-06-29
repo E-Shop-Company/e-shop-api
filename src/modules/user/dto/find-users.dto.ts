@@ -11,7 +11,7 @@ export class FindUsersDto extends PaginateQueryOptionsDto {
     type: String,
     required: false,
     description: 'Search Word',
-    example: 'John',
+    example: 'John'
   })
   @IsOptional()
   @IsString()
@@ -22,7 +22,7 @@ export class FindUsersDto extends PaginateQueryOptionsDto {
     required: false,
     type: Number,
     description: 'Number of items per page',
-    example: 5,
+    example: 5
   })
   @Transform((value: any) => parseInt(value, 10))
   @IsOptional()
@@ -33,7 +33,7 @@ export class FindUsersDto extends PaginateQueryOptionsDto {
     required: false,
     type: Number,
     description: 'Page number',
-    example: 3,
+    example: 3
   })
   @Transform((value: any) => parseInt(value, 10))
   @IsOptional()
@@ -45,7 +45,7 @@ export class FindUsersDto extends PaginateQueryOptionsDto {
     type: String,
     enum: ['id', 'createdAt', '...etc'],
     example: 'createdAt',
-    description: 'Sorting options as JSON string',
+    description: 'Sorting options as JSON string'
   })
   @IsOptional()
   @IsEnum(SortByEnum)
@@ -57,7 +57,7 @@ export class FindUsersDto extends PaginateQueryOptionsDto {
     type: String,
     enum: ['ASC', 'DESC'],
     example: 'ASC',
-    description: 'Direction options as JSON string',
+    description: 'Direction options as JSON string'
   })
   @IsOptional()
   @IsEnum(SortDirectionEnum)

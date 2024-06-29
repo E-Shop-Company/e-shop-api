@@ -6,8 +6,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
   timestamps: true,
   versionKey: false,
   toJSON: {
-    virtuals: true,
-  },
+    virtuals: true
+  }
 })
 export class Image {
   @Prop({ type: String })

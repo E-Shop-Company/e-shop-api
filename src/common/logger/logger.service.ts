@@ -14,7 +14,7 @@ export class LoggerService {
 
   constructor(
     private readonly repository: LoggerRepository,
-    private readonly configService: ConfigService,
+    private readonly configService: ConfigService
   ) {
     this.testMode = this.configService.get<string>('app.env') === 'testing';
   }
@@ -29,14 +29,14 @@ export class LoggerService {
       user: new Types.ObjectId(user),
       anonymous: user ? false : true,
       description,
-      tags,
+      tags
     });
   }
 
   debug({
     description,
     user,
-    tags,
+    tags
   }: CreateLoggerDto): Promise<ILoggerDocument> {
     if (this.testMode) {
       return;
@@ -47,14 +47,14 @@ export class LoggerService {
       user: new Types.ObjectId(user),
       anonymous: user ? false : true,
       description,
-      tags,
+      tags
     });
   }
 
   warning({
     description,
     user,
-    tags,
+    tags
   }: CreateLoggerDto): Promise<ILoggerDocument> {
     if (this.testMode) {
       return;
@@ -65,14 +65,14 @@ export class LoggerService {
       user: new Types.ObjectId(user),
       anonymous: user ? false : true,
       description,
-      tags,
+      tags
     });
   }
 
   error({
     description,
     user,
-    tags,
+    tags
   }: CreateLoggerDto): Promise<ILoggerDocument> {
     if (this.testMode) {
       return;
@@ -83,7 +83,7 @@ export class LoggerService {
       user: new Types.ObjectId(user),
       anonymous: user ? false : true,
       description,
-      tags,
+      tags
     });
   }
 }

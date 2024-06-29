@@ -11,7 +11,7 @@ import { Image } from '../entities/image.entity';
 export class ImageRepository extends BaseRepository<IImageDocument> {
   constructor(
     @InjectModel(Image.name)
-    protected readonly model: PaginateModel<IImageDocument>,
+    protected readonly model: PaginateModel<IImageDocument>
   ) {
     super(model);
   }

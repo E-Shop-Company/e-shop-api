@@ -9,30 +9,30 @@ import { ENUM_LOGGER_LEVEL } from '../enums/logger.enum';
 export class Logger {
   @Prop({
     required: true,
-    enum: ENUM_LOGGER_LEVEL,
+    enum: ENUM_LOGGER_LEVEL
   })
   level: string;
 
   @Prop({
-    required: false,
+    required: false
   })
   user?: Types.ObjectId;
 
   @Prop({
     required: true,
-    default: true,
+    default: true
   })
   anonymous: boolean;
 
   @Prop({
     required: true,
     trim: true,
-    lowercase: true,
+    lowercase: true
   })
   description: string;
 
   @Prop({
-    required: false,
+    required: false
   })
   tags?: string[];
 }

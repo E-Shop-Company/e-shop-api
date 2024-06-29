@@ -16,7 +16,7 @@ export class UserService extends BaseService<UserRepository> {
   constructor(
     protected readonly repository: UserRepository,
     protected readonly awsService: AwsS3Service,
-    protected readonly imageService: ImageService,
+    protected readonly imageService: ImageService
   ) {
     super();
   }
@@ -44,7 +44,7 @@ export class UserService extends BaseService<UserRepository> {
 
   async uploadImage(
     id: string | Types.ObjectId,
-    file: Express.Multer.File,
+    file: Express.Multer.File
   ): Promise<IUserDocument> {
     console.log(id);
     const user = await this.repository.findById(id);
@@ -63,20 +63,20 @@ export class UserService extends BaseService<UserRepository> {
       user._id as string,
       content,
       {
-        path: `images/users`,
-      },
+        path: `images/users`
+      }
     );
 
     const imageDoc = await this.imageService.create(aws);
 
     return this.repository.updateById(id, {
-      avatar: imageDoc._id,
+      avatar: imageDoc._id
     });
   }
 
   async uploadLoggedinUserImage(
     userId: string,
-    file: Express.Multer.File,
+    file: Express.Multer.File
   ): Promise<IUserDocument> {
     const user = await this.repository.deleteById(userId);
 
@@ -93,14 +93,14 @@ export class UserService extends BaseService<UserRepository> {
       user._id,
       content,
       {
-        path: `images/users`,
-      },
+        path: `images/users`
+      }
     );
 
     const imageDoc = await this.imageService.create(aws);
 
     return this.repository.updateById(user._id, {
-      avatar: imageDoc._id,
+      avatar: imageDoc._id
     });
   }
 

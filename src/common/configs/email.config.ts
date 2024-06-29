@@ -6,9 +6,9 @@ export default registerAs(
     from: process.env.CLIENT_EMAIL,
     client: {
       id: process.env.CLIENT_ID,
-      secret: process.env.CLIENT_SECRET,
+      secret: process.env.CLIENT_SECRET
     },
     RedirectUri: process.env.REDIRECT_URI,
-    RefreshToken: process.env.REFRESH_TOKEN,
-  }),
+    RefreshToken: process.env.REFRESH_TOKEN
+  })
 );

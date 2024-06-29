@@ -44,7 +44,7 @@ export abstract class BaseService<R extends IBaseRepository<Document>>
 
   findPaginated(
     filter: object,
-    paginateOptions: IPaginateOptions,
+    paginateOptions: IPaginateOptions
   ): Promise<any> {
     return this.repository.paginate(filter, paginateOptions);
   }
