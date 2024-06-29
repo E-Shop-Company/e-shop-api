@@ -12,7 +12,10 @@ export default registerAs(
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     debug: process.env.DATABASE_DEBUG,
-    url: process.env.DATABASE_URL
+    url: process.env.DATABASE_URL,
+    development_database: process.env.DEVELOPMENT_DATABASE_NAME,
+    production_database: process.env.PRODUCTION_DATABASE_NAME,
+    database_options: process.env.DATABASE_OPTIONS,
   })
 );
 
@@ -21,7 +24,12 @@ export class MongooseConfigService implements MongooseOptionsFactory {
   constructor(private configService: ConfigService) {}
 
   createMongooseOptions(): MongooseModuleOptions {
-    const uri = this.configService.get<string>('database.url');
+    const uri =
+      this.configService.get<string>('database.url') +
+      (this.configService.get<string>('app.env') === 'development'
+        ? this.configService.get<string>('database.development_database')
+        : this.configService.get<string>('database.production_database')) +
+      this.configService.get<string>('database.database_options');
     return {
       uri,
       connectionFactory: (connection) => {
@@ -31,7 +39,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
         connection.plugin(require('mongoose-autopopulate'));
         Logger.debug(`App connected to MongoDB at ${uri}`, 'MONGODB');
         return connection;
-      }
+      },
     };
   }
 }
